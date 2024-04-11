@@ -19,7 +19,8 @@ router.get('/gs2c/(.*)', {
   caching: {
     max_age: '1d',
     stale_while_revalidate: '1d',
-    first_hit_caching: true
+    first_hit_caching: true,
+    bypass_client_cache: true
   },
   origin: {
     set_origin: 'dgi-lab',
