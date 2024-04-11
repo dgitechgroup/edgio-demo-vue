@@ -13,7 +13,7 @@ module.exports = {
   // Overrides the default path to the routes file. The path should be relative to the root of your app.
   // routes: 'routes.js',
 
-  If you need to proxy some URLs to an origin instead of your Next.js app, you can configure the origins here:
+  // If you need to proxy some URLs to an origin instead of your Next.js app, you can configure the origins here:
   origins: [
     {
       // The name of the backend origin
