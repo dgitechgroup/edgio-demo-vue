@@ -16,9 +16,6 @@ const defaultFeatures: Features = {
 const router = new Router()
 
 router.get('/gs2c/(.*)', {
-  caching: {
-    max_age: "1d"
-  },
   origin: {
     set_origin: 'dgi-lab',
   },
