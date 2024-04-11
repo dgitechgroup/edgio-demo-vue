@@ -1,4 +1,4 @@
-lt# File: .github/workflows/edgio.yml
+# File: .github/workflows/edgio.yml
 # Purpose: Deploy to Edgio upon specific GitHub events.
 
 # Deployment Rules:
