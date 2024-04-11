@@ -21,6 +21,9 @@ router.get('/gs2c/(.*)', {
     stale_while_revalidate: '1d',
     first_hit_caching: true
   },
+  headers: {
+    debug_header: true,
+  },
   origin: {
     set_origin: 'dgi-lab',
   },
