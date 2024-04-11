@@ -18,8 +18,7 @@ const router = new Router()
 router.get('/gs2c/(.*)', {
   caching: {
     max_age: '1d',
-    stale_while_revalidate: '1d',
-    service_worker_max_age: '1h'
+    stale_while_revalidate: '1d'
   },
   origin: {
     set_origin: 'dgi-lab',
