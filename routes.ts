@@ -15,11 +15,11 @@ const defaultFeatures: Features = {
 
 const router = new Router()
 
-router.get('/gs2c/common/v3/games-html5/games/vs/vswaysmonkey/mobile', {
+router.get('/gs2c', {
   origin: {
     set_origin: 'dgi-lab',
   },
 });
-router.match('/', defaultFeatures).use(vueRoutes)
+// router.match('/', defaultFeatures).use(vueRoutes)
 
 export default router
