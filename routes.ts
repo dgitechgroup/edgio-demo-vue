@@ -15,6 +15,11 @@ const defaultFeatures: Features = {
 
 const router = new Router()
 
+router.get('/gs2c/(.*)', {
+  origin: {
+    set_origin: 'dgi-lab',
+  },
+});
 router.match('/(.*)', defaultFeatures).use(vueRoutes)
 
 export default router
