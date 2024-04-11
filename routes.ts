@@ -18,14 +18,13 @@ const router = new Router()
 router.get('/gs2c/(.*)', {
   caching: {
     max_age: '1d',
-    stale_while_revalidate: '1d',
-    first_hit_caching: true
+    stale_while_revalidate: '1h'
   },
   headers: {
-    debug_header: true,
+    debug_header: true
   },
   origin: {
-    set_origin: 'dgi-lab',
+    set_origin: 'dgi-lab'
   },
 });
 // router.match('/', defaultFeatures).use(vueRoutes)
