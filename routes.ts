@@ -13,4 +13,8 @@ const defaultFeatures: Features = {
   }
 }
 
-export default new Router().match('/(.*)', defaultFeatures).use(vueRoutes)
+const router = new Router()
+
+router.match('/(.*)', defaultFeatures).use(vueRoutes)
+
+export default router
