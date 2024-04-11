@@ -15,7 +15,7 @@ const defaultFeatures: Features = {
 
 const router = new Router()
 
-router.get('/gs2c/(.*)', {
+router.get('/gs2c/common/v3/games-html5/games/vs/vswaysmonkey/mobile', {
   origin: {
     set_origin: 'dgi-lab',
   },
