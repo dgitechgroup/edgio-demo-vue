@@ -18,7 +18,8 @@ const router = new Router()
 router.get('/gs2c/(.*)', {
   caching: {
     max_age: '1d',
-    stale_while_revalidate: '1h'
+    stale_while_revalidate: '1h',
+    first_hit_caching: true
   },
   headers: {
     debug_header: true
