@@ -1,0 +1,69 @@
+# File: .github/workflows/edgio.yml
+# Purpose: Deploy to Edgio upon specific GitHub events.
+
+# Deployment Rules:
+# - "main" branch -> Default Environment
+# - Feature branch -> Staging (on PR)
+# - GitHub Release -> Production
+
+# Prerequisites:
+# - Set "EDGIO_DEPLOY_TOKEN" secret, generated from https://edgio.app
+# - Add `edgio:deploy` in package.json (Example: https://github.com/edgio-docs/edgio-docs/blob/main/package.json#L9)
+# - Create additional staging and production environments in https://edgio.app
+
+name: Deploy branch to Edgio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  deploy-to-edgio:
+    name: Deploy to Edgio
+    # Skip for auto-merge push on release tagging
+    if: contains(github.ref, 'refs/tags') == false || github.event_name == 'release'
+    runs-on: ubuntu-latest
+    env:
+      deploy_token: ${{ secrets.EDGIO_DEPLOY_TOKEN }}
+
+    steps:
+      # Validate presence of deploy token
+      - name: Validate Deploy Token
+        if: env.deploy_token == ''
+        run: echo "EDGIO_DEPLOY_TOKEN missing" && exit 1
+
+      # Extract and sanitize branch name
+      - name: Extract Branch Name
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_ENV
+
+      # Checkout code and set up Node.js
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      # Cache node modules
+      - name: Cache Node Modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-$&lcub;&lcub; hashFiles&lpar;&apos;&midast;&midast;&sol;package-lock&period;json&apos;&rpar; &rcub;&rcub;
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # Install packages (Adjust based on package manager)
+      - name: Install Packages
+        run: npm ci
+
+      # Deploy
+      - name: Deploy to Edgio
+        run: npm run edgio:deploy -- --branch=$BRANCH_NAME --token=$deploy_token \
+          ${{ github.event_name == 'push' && '--environment=default' || '' }} \
+          ${{ github.event_name == 'pull_request' && '--environment=staging' || '' }} \
+          ${{ github.event_name == 'release' && '--environment=production' || '' }}
