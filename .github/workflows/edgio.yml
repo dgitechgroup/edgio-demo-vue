@@ -63,7 +63,7 @@ jobs:
 
       # Deploy
       - name: Deploy to Edgio
-        run: npm run edgio:deploy -- --branch=$BRANCH_NAME --token=$deploy_token \
+        run: npm run edgio:deploy --branch=$BRANCH_NAME --token=$deploy_token \
           ${{ github.event_name == 'push' && '--environment=default' || '' }} \
           ${{ github.event_name == 'pull_request' && '--environment=staging' || '' }} \
           ${{ github.event_name == 'release' && '--environment=production' || '' }}
