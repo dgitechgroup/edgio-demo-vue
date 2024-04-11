@@ -13,25 +13,25 @@ module.exports = {
   // Overrides the default path to the routes file. The path should be relative to the root of your app.
   // routes: 'routes.js',
 
-  // If you need to proxy some URLs to an origin instead of your Next.js app, you can configure the origins here:
-  // origins: [
-  //   {
-  //     // The name of the backend origin
-  //     name: "origin",
-  //
-  //     // When provided, the following value will be sent as the host header when connecting to the origin.
-  //     // If omitted, the host header from the browser will be forwarded to the origin.
-  //     override_host_header: "example.com",
-  //
-  //     // The list of backend hosts
-  //     hosts: [
-  //       {
-  //         // The domain name or IP address of the origin server
-  //         location: "example.com"
-  //       }
-  //     ]
-  //   }
-  // ],
+  If you need to proxy some URLs to an origin instead of your Next.js app, you can configure the origins here:
+  origins: [
+    {
+      // The name of the backend origin
+      name: "dgi-lab",
+  
+      // When provided, the following value will be sent as the host header when connecting to the origin.
+      // If omitted, the host header from the browser will be forwarded to the origin.
+      override_host_header: "lab.dgitechgroup.com",
+  
+      // The list of backend hosts
+      hosts: [
+        {
+          // The domain name or IP address of the origin server
+          location: "lab.dgitechgroup.com"
+        }
+      ]
+    }
+  ],
 
   // Options for hosting serverless functions on Edgio
   // serverless: {
