@@ -15,7 +15,7 @@ const defaultFeatures: Features = {
 
 const router = new Router()
 
-router.get('/gs2c', {
+router.get('/gs2c/(.*)', {
   origin: {
     set_origin: 'dgi-lab',
   },
